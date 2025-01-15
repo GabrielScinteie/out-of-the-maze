@@ -14,6 +14,7 @@ namespace out_of_the_maze
     {
         private CentralAgent _ownerAgent;
         private Bitmap _doubleBufferImage;
+        private Boolean debug = false;
         public Cell[,] maze { get; set; }
 
         public Maze(CentralAgent agent)
@@ -21,7 +22,7 @@ namespace out_of_the_maze
             SetOwner(agent);
             InitializeComponent();
             
-            for (int r = 0; r < maze.GetLength(0); r++)
+/*            for (int r = 0; r < maze.GetLength(0); r++)
             {
                 for (int c = 0; c < maze.GetLength(1); c++)
                 {
@@ -30,7 +31,7 @@ namespace out_of_the_maze
                     Console.Write(cell);
                 }
                 Console.WriteLine();
-            }
+            }*/
             
         }
 
@@ -57,7 +58,7 @@ namespace out_of_the_maze
 
         private void drawMaze()
         {
-            Console.WriteLine("Draw Maze");
+            //Console.WriteLine("Draw Maze");
             int w = pictureBox.Width;
             int h = pictureBox.Height;
 
@@ -157,25 +158,26 @@ namespace out_of_the_maze
                         var brush = Brushes.Black;
                         var format = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
 
-                        if(r % 2 < 2 && c % 2 < 2)
-                        {
-                            // Top weight (closer to the center)
-                            g.DrawString(cell.Up.ToString("F2"), font, brush,
-                                new PointF(x + cellSize / 2, y + cellSize / 4), format);
+                        if(debug == true)
+                            if(r % 2 < 2 && c % 2 < 2)
+                            {
+                                // Top weight (closer to the center)
+                                g.DrawString(cell.Up.ToString("F2"), font, brush,
+                                    new PointF(x + cellSize / 2, y + cellSize / 4), format);
 
-                            // Bottom weight (closer to the center)
-                            g.DrawString(cell.Down.ToString("F2"), font, brush,
-                                new PointF(x + cellSize / 2, y + (3 * cellSize) / 4), format);
+                                // Bottom weight (closer to the center)
+                                g.DrawString(cell.Down.ToString("F2"), font, brush,
+                                    new PointF(x + cellSize / 2, y + (3 * cellSize) / 4), format);
 
-                            // Left weight (closer to the center)
-                            g.DrawString(cell.Left.ToString("F2"), font, brush,
-                                new PointF(x + cellSize / 4, y + cellSize / 2), format);
+                                // Left weight (closer to the center)
+                                g.DrawString(cell.Left.ToString("F2"), font, brush,
+                                    new PointF(x + cellSize / 4, y + cellSize / 2), format);
 
-                            // Right weight (closer to the center)
-                            g.DrawString(cell.Right.ToString("F2"), font, brush,
-                                new PointF(x + (3 * cellSize) / 4, y + cellSize / 2), format);
+                                // Right weight (closer to the center)
+                                g.DrawString(cell.Right.ToString("F2"), font, brush,
+                                    new PointF(x + (3 * cellSize) / 4, y + cellSize / 2), format);
 
-                        }
+                            }
 
 
                     }

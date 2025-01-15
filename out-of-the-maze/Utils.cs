@@ -8,10 +8,11 @@ namespace out_of_the_maze
 {
     public class Utils
     {
-        public static int Size = 2;
-        public static int NoExplorers = 1;
+        public static int Size = 20;
+        public static int NoExplorers = 15;
         public static Random random = new Random();
-        public static double decay = 0.5;
+        public static double decay = 0.1;
+        public static Boolean heuristic = false;
         public static void ParseMessage(string content, out string action, out string parameters)
         {
             string[] t = content.Split();
